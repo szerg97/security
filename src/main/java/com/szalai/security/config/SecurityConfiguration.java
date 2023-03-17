@@ -26,16 +26,16 @@ public class SecurityConfiguration {
             .csrf()
                 .disable()
             .authorizeHttpRequests()
-                .requestMatchers(HttpMethod.POST,"/api/v1/auth/**")
+            .requestMatchers("/api/v1/auth/**")
                 .permitAll()
-                .anyRequest()
+            .anyRequest()
                 .authenticated()
-                .and()
-            .sessionManagement()
+            .and()
+                .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                .and()
+            .and()
             .authenticationProvider(authenticationProvider)
-                .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
+            .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
     }
